@@ -12,7 +12,7 @@ A personal cookiecutter template designed to streamline project setup and develo
 ## Getting Started
 
 1. **Install Cookiecutter**: `python -m pip install --user cookiecutter`
-2. **Generate a Project**: `cookiecutter gh:jasonlo/cookiecutter-code-template`
+2. **Generate a Project**: `cookiecutter gh:jasonlo/code-template`
 3. **Open project in vscode**: `code <project_name>`
 
 ## License
