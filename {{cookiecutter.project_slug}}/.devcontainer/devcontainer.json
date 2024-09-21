@@ -1,0 +1,14 @@
+{
+    "name": "{{cookiecutter.project_name}}",
+    "build": {"dockerfile": "Dockerfile", "context": ".."},
+    "remoteUser": "root",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ],
+    "runArgs": ["--network=host"],
+    "postCreateCommand": "chmod +x .devcontainer/post_create.sh && .devcontainer/post_create.sh"
+}
