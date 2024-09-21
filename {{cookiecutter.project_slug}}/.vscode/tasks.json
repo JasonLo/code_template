@@ -2,11 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "uv-lock",
-            "type": "shell",
-            "command": "uv pip compile pyproject.toml -o requirements_lock.txt"
-        },
-        {
             "label": "dev-run",
             "type": "shell",
             "command": "fastapi dev {{ cookiecutter.package_name }}/main.py",
