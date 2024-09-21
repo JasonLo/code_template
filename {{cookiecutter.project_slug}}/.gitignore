@@ -1,0 +1,7 @@
+__pycache__/
+.hypothesis/
+.pytest_cache/
+.ipynb_checkpoints
+.env
+.venv
+secret/

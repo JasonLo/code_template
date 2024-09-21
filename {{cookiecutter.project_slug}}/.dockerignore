@@ -1,0 +1,7 @@
+*.log
+Dockerfile
+.git
+*.tmp
+/tmp
+.vscode
+.devcontainer
