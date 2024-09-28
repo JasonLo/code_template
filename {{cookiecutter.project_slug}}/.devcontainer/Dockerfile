@@ -27,9 +27,3 @@ RUN curl -sS https://starship.rs/install.sh | sh -s -- -y && \
 ADD https://astral.sh/uv/install.sh /uv-installer.sh
 RUN sh /uv-installer.sh && rm /uv-installer.sh
 ENV PATH="/root/.cargo/bin:${PATH}"
-
-RUN uv tool install fastapi[standard]
-
-# Install Python dependencies
-COPY requirements.txt .
-RUN uv pip install -r requirements.txt --system

@@ -1,7 +1,13 @@
 *.log
 Dockerfile
+docker-compose.yml
 .git
 *.tmp
 /tmp
-.vscode
-.devcontainer
+.vscode/
+.devcontainer/
+.venv/
+*.env
+venv/
+tests/
+__pycache__/

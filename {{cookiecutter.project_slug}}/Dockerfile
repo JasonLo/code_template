@@ -2,6 +2,7 @@
 FROM python:{{cookiecutter.python_version}}-slim
 
 WORKDIR /app
+EXPOSE {{cookiecutter.app_port}}
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
@@ -15,10 +16,13 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 COPY pyproject.toml .
 COPY uv.lock .
 RUN uv sync --frozen
-RUN uv tool install fastapi[standard]
 ENV PATH="/root/.local/bin:${PATH}"
 
+# Copy the application
 COPY . .
 
-EXPOSE {{cookiecutter.app_port}}
-CMD ["fastapi", "run", "new_project/main.py", "--host", "0.0.0.0", "--port", "8080"]
+{% if cookiecutter.app_type == "fastapi" %}
+# Install FastAPI
+RUN uv tool install fastapi[standard]
+CMD ["fastapi", "run", "{{cookiecutter.package_name}}/main.py", "--port", "{{cookiecutter.app_port}}"]
+{% endif %}

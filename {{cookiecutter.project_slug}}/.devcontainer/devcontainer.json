@@ -9,6 +9,16 @@
     "mounts": [
         "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
     ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "actboy168.tasks",
+                "ms-toolsai.python-ds-extension-pack",
+                "ms-azuretools.vscode-docker",
+                "charliermarsh.ruff"
+            ]
+        }
+    },
     "runArgs": ["--network=host"],
     "postCreateCommand": "chmod +x .devcontainer/post_create.sh && .devcontainer/post_create.sh"
 }

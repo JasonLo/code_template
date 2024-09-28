@@ -6,5 +6,8 @@
     "author_email": "lcmjlo@gmail.com",
     "description": "A short description of the project.",
     "python_version": "3.12",
+    "app_type": [
+        "fastapi"
+    ],
     "app_port": "8080"
 }
