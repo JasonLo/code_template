@@ -21,8 +21,5 @@ ENV PATH="/root/.local/bin:${PATH}"
 # Copy the application
 COPY . .
 
-{% if cookiecutter.app_type == "fastapi" %}
-# Install FastAPI
-RUN uv tool install fastapi[standard]
-CMD ["fastapi", "run", "{{cookiecutter.package_name}}/main.py", "--port", "{{cookiecutter.app_port}}"]
-{% endif %}
+# Inject app_type specific commands
+{{ POST_GEN_INJECTION }}

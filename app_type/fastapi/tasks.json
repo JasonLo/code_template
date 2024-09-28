@@ -4,7 +4,7 @@
         {
             "label": "dev-run",
             "type": "shell",
-            "command": "fastapi dev {{ cookiecutter.package_name }}/main.py",
+            "command": "fastapi dev {{ cookiecutter.package_name }}/main.py"
         },
         {
             "label": "docker-run",

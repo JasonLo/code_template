@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 config_git() {
     echo "Configuring Git..."
     git config --global --add safe.directory /workspace/{{cookiecutter.package_name}}
@@ -47,32 +45,13 @@ maybe_init_uv() {
     fi
 }
 
-install_fastapi() {
-    echo "Installing fastapi as uv tool..."
-    uv add fastapi[standard]
-    uv tool install fastapi[standard]
-}
-
-install_streamlit() {
-    echo "Installing streamlit as uv tool..."
-    uv add streamlit
-    uv tool install streamlit
-}   
-
 # Configure development tools
+set -e
 config_git
 maybe_init_git
 maybe_init_uv
 
-# Install the uv tool for the app type, you may want to lock the version
-APP_TYPE="{{ cookiecutter.app_type }}"
-if [ "$APP_TYPE" == "fastapi" ]; then
-    install_fastapi
-elif [ "$APP_TYPE" == "streamlit" ]; then
-    install_streamlit
-else
-    echo "Unknown app type: $APP_TYPE"
-    exit 1
-fi
+{{ POST_GEN_INJECTION }}
 
 echo "Post-create script complete."
+
