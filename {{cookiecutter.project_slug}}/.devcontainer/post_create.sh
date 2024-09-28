@@ -17,8 +17,6 @@ maybe_init_git() {
     if [ ! -d .git ]; then
         echo "Initializing a new Git repository..."
         git init -b main
-        git add .
-        git commit -m "Initial commit"
         echo "Git repository initialized."
     else
         echo "Git repository already initialized."
@@ -51,7 +49,7 @@ config_git
 maybe_init_git
 maybe_init_uv
 
-{{ POST_GEN_INJECTION }}
+POST_GEN_INJECTION
 
 echo "Post-create script complete."
 

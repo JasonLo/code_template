@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # Devcontainer post_create.sh
-post_create_file = Path("{{cookiecutter.project_slug}}/.devcontainer/post_create.sh")
+post_create_file = Path(".devcontainer/post_create.sh")
 post_create_injection = """
 echo "Installing fastapi as uv tool..."
 uv add fastapi[standard]
@@ -9,24 +9,20 @@ uv tool install fastapi[standard]
 """
 
 # Dockerfile (for Docker-run)
-docker_file = Path("{{cookiecutter.project_slug}}/Dockerfile")
+docker_file = Path("Dockerfile")
 docker_injection = """
 RUN uv tool install fastapi[standard]
 CMD ["fastapi", "run", "{{cookiecutter.package_name}}/main.py", "--port", "{{cookiecutter.app_port}}"]
 """
 
 main_file_source = Path("app_type/fastapi/main.py")
-main_file_destination = Path(
-    "{{cookiecutter.project_slug}}/{{cookiecutter.package_name}}/main.py"
-)
+main_file_destination = Path("{{cookiecutter.package_name}}/main.py")
 
 tasks_file_source = Path("app_type/fastapi/tasks.json")
-tasks_file_destination = Path("{{cookiecutter.project_slug}}/.vscode/tasks.json")
+tasks_file_destination = Path(".vscode/tasks.json")
 
 
-def inject(
-    file: Path, content: str, placeholder: str = "{{ POST_GEN_INJECTION }}"
-) -> None:
+def inject(file: Path, content: str, placeholder: str = "POST_GEN_INJECTION") -> None:
     """Inject content into a file at the placeholder."""
 
     with open(file, "r") as f:

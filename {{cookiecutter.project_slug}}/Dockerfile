@@ -22,4 +22,4 @@ ENV PATH="/root/.local/bin:${PATH}"
 COPY . .
 
 # Inject app_type specific commands
-{{ POST_GEN_INJECTION }}
+POST_GEN_INJECTION
