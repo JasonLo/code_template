@@ -20,8 +20,8 @@ main_file_destination = Path(
     "{{cookiecutter.project_slug}}/{{cookiecutter.package_name}}/main.py"
 )
 
-tasks_file_source = Path("app_type/fastapi/task.json")
-tasks_file_destination = Path("{{cookiecutter.project_slug}}/.vscode/task.json")
+tasks_file_source = Path("app_type/fastapi/tasks.json")
+tasks_file_destination = Path("{{cookiecutter.project_slug}}/.vscode/tasks.json")
 
 
 def inject(
