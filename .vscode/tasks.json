@@ -4,7 +4,7 @@
         {
             "label": "test",
             "type": "shell",
-            "command": "uv tool run --with cookiecutter pytest"
+            "command": "uv run pytest"
         }
     ]
 }
