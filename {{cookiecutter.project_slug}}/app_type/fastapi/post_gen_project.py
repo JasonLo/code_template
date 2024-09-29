@@ -17,7 +17,11 @@ CMD ["fastapi", "run", "{{cookiecutter.package_name}}/main.py", "--port", "{{coo
 
 # For VSCode tasks.json
 DEV_RUN_COMMAND = "fastapi dev {{ cookiecutter.package_name }}/main.py"
-DOCKER_RUN_COMMAND = "docker build -t {{ cookiecutter.package_name }} . && docker run --rm -p {{cookiecutter.app_port}}:{{cookiecutter.app_port}} {{ cookiecutter.package_name }}"
+DOCKER_RUN_COMMAND = (
+    "docker build -t {{ cookiecutter.package_name }} . && "
+    "docker run --rm -p {{cookiecutter.app_port}}:{{cookiecutter.app_port}} "
+    "{{ cookiecutter.package_name }}"
+)
 
 
 def make_tasks_json(dev_run_command: str, docker_run_command: str) -> None:
@@ -39,26 +43,26 @@ def make_tasks_json(dev_run_command: str, docker_run_command: str) -> None:
         ],
     }
 
+    Path(".vscode").mkdir(exist_ok=True)
     with open(Path(".vscode/tasks.json"), "w") as f:
         f.write(json.dumps(tasks, indent=4))
 
 
-def inject(file: Path, content: str, placeholder: str = "POST_GEN_INJECTION") -> None:
+def inject(
+    file_path: Path, content: str, placeholder: str = "POST_GEN_INJECTION"
+) -> None:
     """Inject content into a file at the placeholder."""
 
-    with open(file, "r") as f:
-        text = f.read()
+    text = file_path.read_text()
     text = text.replace(placeholder, content)
-    with open(file, "w") as f:
-        f.write(text)
+    file_path.write_text(text)
 
 
 def copy(source: Path, destination: Path) -> None:
     """Copy a file from source to destination."""
-    with open(source, "r") as f:
-        text = f.read()
-    with open(destination, "w") as f:
-        f.write(text)
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(source.read_text())
 
 
 def main() -> None:
@@ -69,8 +73,10 @@ def main() -> None:
     make_tasks_json(
         dev_run_command=DEV_RUN_COMMAND, docker_run_command=DOCKER_RUN_COMMAND
     )
-    inject(file=Path(".devcontainer/post_create.sh"), content=POST_CREATE_INJECTION)
-    inject(file=Path("Dockerfile"), content=DOCKER_INJECTION)
+    inject(
+        file_path=Path(".devcontainer/post_create.sh"), content=POST_CREATE_INJECTION
+    )
+    inject(file_path=Path("Dockerfile"), content=DOCKER_INJECTION)
 
 
 if __name__ == "__main__":

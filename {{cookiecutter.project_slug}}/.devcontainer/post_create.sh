@@ -38,6 +38,7 @@ maybe_init_uv() {
         echo "Initializing a uv project..."
         uv init
         echo "uv project initialized."
+        rm hello.py
     else
         echo "uv project already initialized."
     fi
