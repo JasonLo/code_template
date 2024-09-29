@@ -1,22 +1,20 @@
 import json
 from pathlib import Path
 
-APP_PYPI = "fastapi[standard]"
-
 # Inject into devcontainer post_create.sh
-POST_CREATE_INJECTION = f"""
-uv add {APP_PYPI}
-uv tool install {APP_PYPI}
+POST_CREATE_INJECTION = """
+uv add {{cookiecutter.app_type}}
+uv tool install {{cookiecutter.app_type}}
 """
 
 # Inject into Dockerfile
 DOCKER_INJECTION = """
-RUN uv tool install {APP_PYPI}
-CMD ["fastapi", "run", "{{cookiecutter.package_name}}/main.py", "--port", "{{cookiecutter.app_port}}"]
-""".format(APP_PYPI=APP_PYPI)
+RUN uv tool install streamlit
+CMD ["streamlit", "run", "{{cookiecutter.package_name}}/main.py", "--server.port", "{{cookiecutter.app_port}}"]
+"""
 
 # For VSCode tasks.json
-DEV_RUN_COMMAND = "fastapi dev {{ cookiecutter.package_name }}/main.py"
+DEV_RUN_COMMAND = "streamlit run {{ cookiecutter.package_name }}/main.py"
 DOCKER_RUN_COMMAND = "docker build -t {{ cookiecutter.package_name }} . && docker run --rm -p {{cookiecutter.app_port}}:{{cookiecutter.app_port}} {{ cookiecutter.package_name }}"
 
 

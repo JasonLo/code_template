@@ -13,7 +13,8 @@ A personal cookiecutter template designed to streamline project setup and develo
 
 1. **Install Cookiecutter**: `python -m pip install --user cookiecutter`
 2. **Generate a Project**: `cookiecutter gh:jasonlo/code-template`
-3. **Open project in vscode**: `code <project_name>`
+3. **Open project in vscode**: `code <project_name>`, click "Reopen in Container".
+4. **Run**: Click `dev-run` or `docker-run` on status bar.
 
 ## License
 
