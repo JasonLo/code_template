@@ -44,11 +44,28 @@ maybe_init_uv() {
     fi
 }
 
+install_ansible() {
+    echo "Installing Ansible..."
+    apt update
+    apt install ansible -y
+
+    # Add aliases for Ansible Vault
+    echo "alias enc='ansible-vault encrypt .env --output .env.enc'" >> ~/.bashrc
+    echo "alias dec='ansible-vault decrypt .env.enc --output .env'" >> ~/.bashrc
+
+    echo "Ansible installed."
+}
+
 # Configure development tools
 set -e
 config_git
 maybe_init_git
 maybe_init_uv
+
+# Install Ansible
+{% if cookiecutter.use_ansible_vault == "yes" %}
+install_ansible
+{% endif %}
 
 POST_GEN_INJECTION
 
