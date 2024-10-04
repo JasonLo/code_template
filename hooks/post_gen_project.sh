@@ -14,7 +14,7 @@ fi
 rm -rf app_type
 
 # Install Ansible
-{% if cookiecutter.use_ansible_vault == "yes" %}
+{% if cookiecutter.use_ansible_vault %}
 # Write the Ansible Vault password to .vault_pass
 echo {{cookiecutter.ansible_vault_password}} > ./secrets/.vault_pass
 echo "[defaults]" > ansible.cfg

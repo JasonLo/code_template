@@ -63,7 +63,7 @@ maybe_init_git
 maybe_init_uv
 
 # Install Ansible
-{% if cookiecutter.use_ansible_vault == "yes" %}
+{% if cookiecutter.use_ansible_vault %}
 install_ansible
 {% endif %}
 
